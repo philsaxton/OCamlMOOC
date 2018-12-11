@@ -1,0 +1,34 @@
+Let's define some usual arithmetical functions.
+
+1. gcd that takes two non-negative integers n and m, and that returns the greatest common divisor of n and m, following Euclid's algorithm.
+2. multiple_upto : int -> int -> bool that takes two non-negative integers n and r, and that tells whether n admits at least one divisor between 2 and r, inclusive. In other words that there exists a number d >= 2 and <= r, such that the remainder of the division of n by d is zero.
+3. is_prime a takes a non-negative integer n and checks whether it is a prime number.
+
+Important note: You can assume that both integer_square_root and multiple_of exist, and that they are correct answers to the Simple functions over integers exercise from the previous sequence.
+
+Once is_prime works, you can try writing a new version of it which is self-contained (that contains all definitions of auxiliary functions as locally defined functions).
+
+Answer: 
+
+let rec gcd n m =
+  if n > m then
+    if n mod m = 0 then m else gcd m (n-m)
+  else if m mod n = 0 then n else gcd n (m-n);;
+
+let rec multiple_upto n r =
+  if r >= 2 then 
+    if n mod r = 0 then true else multiple_upto n (r-1)
+  else false;; 
+
+let is_prime n = 
+  (*  let i = 2 in *)
+  let r = integer_square_root n in 
+  let rec not_factor i =
+    if n=1 || (multiple_of n i = true && i <= r)
+    then false
+    else is_factor (i + 1) 
+  and is_factor i =
+    if multiple_of n i = false && i >= r
+    then true
+    else not_factor (i)
+  in not_factor 2;;
