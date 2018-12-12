@@ -1,0 +1,23 @@
+1. Write a function print_int_list : int list -> unit that takes a list of integers as input, and prints all the elements of the list, each on its own line.
+2. Write a function print_every_other : int -> int list -> unit that takes a value k and a list of integers as input, and prints the elements of the list that are in positions multiple of k, each on its own line. Note: the first element of a list is at the position 0, not 1.
+3. Write a function print_list : ('a -> unit) -> 'a list -> unit that takes a printer of values of some type 'a and a list of such values as input, and prints all the elements of the list, each on its own line.
+
+Answer:
+
+let rec print_int_list l =
+  match l with 
+    [] -> ()
+  | h :: r -> print_newline(print_int h); print_int_list r;;
+
+let print_every_other k l = 
+  let rec aux count list = 
+    match list with 
+      [] -> ()
+    | h :: r -> if count mod k = 0 
+        then print_newline(print_int h); aux (count + 1) r
+  in aux 0 l;;
+
+let rec print_list print l =
+  match l with 
+    []-> ()
+  | h :: r -> print_newline(print h); print_list print r;;
