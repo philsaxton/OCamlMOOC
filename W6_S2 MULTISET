@@ -1,0 +1,80 @@
+A multiset is like a set, with the difference that a value can appear more than once.
+
+1. Implement a module MultiSet that implements the signature MultiSet_S.
+2. Define a function letters: string -> char MultiSet.t (where MultiSet is the module defined in the previous question). This function produces a multiset in which all characters are associated to the times they appear in the input string.
+3. Define a function anagram: string -> string -> bool that uses the previous function to tell if two words have the same multiset of characters.
+
+THE GIVEN PRELUDE
+module type MultiSet_S = sig
+
+  (* A multi-set of type ['a t] is a collection of values of
+     type ['a] that may occur several times. *)
+  type 'a t
+
+  (* [occurrences s x] return the number of time [x] occurs
+     in [s]. *)
+  val occurrences : 'a t -> 'a -> int
+
+  (* The empty set has no element. There is only one unique
+     representation of the empty set. *)
+  val empty : 'a t
+
+  (* [insert s x] returns a new multi-set that contains all
+     elements of [s] and a new occurrence of [x]. Typically,
+     [occurrences s x = occurrences (insert s x) x + 1]. *)
+  val insert : 'a t -> 'a -> 'a t
+
+  (* [remove s x] returns a new multi-set that contains all elements
+     of [s] minus an occurrence of [x] (if [x] actually occurs in
+     [s]). Typically, [occurrences s x = occurrences (remove s x) x -
+     1] if [occurrences s x > 0]. *)
+  val remove : 'a t -> 'a -> 'a t
+
+end
+
+Answer: 
+
+module MultiSet = struct
+  
+  type 'a t = 'a list 
+      
+  let occurrences s x =
+    let rec aux s count = 
+      match s with 
+        [] -> count
+      | h :: r -> if h = x then aux r (count + 1) 
+          else aux r count
+    in aux s 0 
+      
+  let empty = []
+              
+  let insert s x = x :: s
+                   
+  let rec remove s x = 
+    match occurrences s x with 
+      0 -> s 
+    | i -> 
+        match s with 
+          [] -> s
+        |  h :: r -> 
+            if h = x then r
+            else h :: (remove r x) 
+end ;;
+
+let letters word =
+  let rec expl i l = 
+    if i < 0 then l else
+      expl (i - 1) (MultiSet.insert l word.[i]) in 
+  expl (String.length word - 1) MultiSet.empty;;
+
+let anagram word1 word2 = 
+  let rec aux w1 w2 =
+  (*match the lenght of the words*)
+  (*check the occurrences of each letter in word1. None can be zero*)
+    match w1, w2 with
+      [], [] -> true 
+    | [], w1 -> true
+    | (h :: r, w2) -> 
+        if MultiSet.occurrences w2 h = 0 then false 
+        else aux r (MultiSet.remove w2 h) in
+  aux (letters word1) (letters word2);; 
