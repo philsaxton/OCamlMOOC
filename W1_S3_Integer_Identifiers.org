@@ -1,5 +1,6 @@
 #+title: Week 1 Session 3: Integer Identifiers
-Suppose that a variable x exists and is an integer. Define a variable x_power_8 that uses three multiplications to calculate x to the power of 8. The only function you are allowed to call is the (*) operator. Hint: use auxiliary variables.
+Suppose that a variable x exists and is an integer. Define a variable x_power_8 that uses three multiplications to calculate x to the power of 8. The only function you are allowed to call is the (*) operator.
+- Hint: use auxiliary variables.
 
 The given prelude:
 #+begin_src ocaml
