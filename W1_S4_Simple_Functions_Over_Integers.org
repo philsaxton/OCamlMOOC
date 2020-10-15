@@ -1,13 +1,13 @@
-Let's define two functions working with integers:
-
-1. multiple_of that takes two integer parameters, n and d, and determines whether n is a multiple of d. The function must return a boolean value. This function can be written without recursion. Look at the operators defined on integers in sequence 1.
-
+#+title:W1_S4: Simple Functions Over Integers
+* Let's define two functions working with integers:
+1. multiple_of that takes two integer parameters, n and d, and determines whether n is a multiple of d. The function must return a boolean value. This function can be written without recursion.
 2. integer_square_root that calculates the integer square root of a positive integer n, that is the largest integer r such that r * r <= n. Hint: you may use floating point arithmetic, but don't forget that you have to convert explicitely between float and int.
 
 Answer:
-
-let multiple_of n d = 
+#+begin_src ocaml
+let multiple_of n d =
   if n mod d = 0 then true else false;;
 
 let integer_square_root n = 
   int_of_float ( floor ( sqrt (float_of_int n)));;
+#+end_src
