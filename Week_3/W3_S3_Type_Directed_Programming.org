@@ -1,14 +1,14 @@
+#+title: Week 3 Session 3: Type Directed Programming
 In this exercise, you will experiment with type-directed programming.
 
-We give you the example program of the lecture in which two type definitions have been changed as in the given prelude. A case Tired has been added to type state, and a case Sleep has been added to type action. 
-By clicking the typecheck button, you can notice that several warnings are issued by the OCaml compiler. Go through the code and fix these warnings as follow.
+We give you the example program of the lecture in which two type definitions have been changed as in the given prelude. A case Tired has been added to type state, and a case Sleep has been added to type action. By clicking the typecheck button, you can notice that several warnings are issued by the OCaml compiler. Go through the code and fix these warnings as follow.
+ 1. Update apply_action so that the Sleep action turns a character from the Tired state to the Hungry state.
+ 2. Update possible_changes_for_character so that the Tired state behaves as the Hungry state.
+ 3. Update describe_state so that the description of the Tired state is "tired".
+ 4. Update tell_action so that tell_action Sleep is "took a nap".
 
-1. Update apply_action so that the Sleep action turns a character from the Tired state to the Hungry state.
-2. Update possible_changes_for_character so that the Tired state behaves as the Hungry state.
-3. Update describe_state so that the description of the Tired state is "tired".
-4. Update tell_action so that tell_action Sleep is "took a nap".
-
-THE GIVEN PRELUDE
+The Given Prelude:
+#+begin_src ocaml
 type story = {
   context         : context;
   perturbation    : event;
@@ -21,9 +21,10 @@ and event = Change of character * state | Action of character * action
 and state = Happy | Hungry | Tired
 and action = Eat | GoToRestaurant | Sleep
 and location = Appartment | Restaurant;;
+#+end_src
 
 Answers: 
-
+#+begin_src ocaml
 let compatible_actions_for_character character context =
   match character with
   | { location = Restaurant } -> [Eat]
@@ -198,3 +199,4 @@ let story = tell (make_story {
       { name = "Socrate"; location = Appartment; state = Happy };
     ]
   });;
+#+end_src
