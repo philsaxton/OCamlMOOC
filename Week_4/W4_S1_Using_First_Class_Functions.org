@@ -1,16 +1,20 @@
+#+title: Week 4 Session 1: Using First Class Functions
 1. Write a function compose : ('a -> 'a) list -> ('a -> 'a) that takes as argument a list l of functions, and that returns the function that is the composition of the functions in l. For instance, compose [f;g;h] x = f (g (h x)). Or with concrete functions, compose [(fun x -> x+1);(fun x -> 3*x);(fun x -> x-1)] 2 = 4.
 2. Write a function fixedpoint : (float -> float) -> float -> float -> float that takes a function f of type float -> float and two floating-point arguments start and delta. The function fixedpoint applies repetitively f to the result of its previous application, starting from start, until it reaches a value y where the difference between y and (f y) is smaller than delta. In that case it returns the value of y. For instance, fixedpoint cos 0. 0.001 yields approximately 0.739 (ref).
 
-THE GIVEN PRELUDE
+The Given Prelude:
+#+begin_src ocaml
 type int_ff = int -> int
+#+end_src
 
 Answer: 
-
+#+begin_src ocaml
 let rec compose = function
-    [] -> fun x -> x
+  | [] -> fun x -> x
   | f :: ls -> fun x -> f (compose ls x);;
 
 let rec fixedpoint f start delta =
   match start with 
-    y when abs_float ((f y) -. y) < delta -> y 
+  | y when abs_float ((f y) -. y) < delta -> y
   | y -> fixedpoint f (f y) delta;; 
+#+end_src

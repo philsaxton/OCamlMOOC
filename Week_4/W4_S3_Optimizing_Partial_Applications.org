@@ -1,12 +1,13 @@
+#+title: Week 4 Session 3: Optimizing Partial Applications
 Every triangle has a circumscribed circle, that is a circle that goes through the three points of a given triangle. Trigonometry tells us that the radius of this circle is s / 2⋅cos(a/2)⋅2⋅cos(b/2)⋅2⋅cos(c/2) where a, b and c are the angles of the triangle, and s is its circumference.
-
-1. Define a function ccr: float -> float -> float -> float -> float that takes as arguments a, b, c and s, and returns the radius of circumscribed circle as described above.
-3. Update ccr so that it does as much work as possible when partially applied to each argument, and minimizes the total number of operations (multiplications, divisions and calls to cos).
+ 1. Define a function ccr: float -> float -> float -> float -> float that takes as arguments a, b, c and s, and returns the radius of circumscribed circle as described above.
+ 2. Update ccr so that it does as much work as possible when partially applied to each argument, and minimizes the total number of operations (multiplications, divisions and calls to cos).
 
 Answer: 
-
+#+begin_src ocaml
 let ccr =
   fun a -> let partial_a = 8. *. cos (a /. 2.) in
     fun b -> let partial_b = cos (b /. 2.) *. partial_a in
       fun c -> let partial_c = cos (c /. 2.) *. partial_b in
         fun s -> s /. partial_c;;
+#+end_src
