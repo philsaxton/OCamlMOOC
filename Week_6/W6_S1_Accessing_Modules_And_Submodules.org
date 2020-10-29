@@ -1,6 +1,8 @@
+#+title: Week 6 Session 1: Accessing Modules And Submodules
 1. Use fully-qualified names to fix the compilation of [bfs]. (The open directive is forbidden here.)
 
-THE GIVEN PRELUDE
+The given prelude:
+#+begin_src ocaml
 module Tree = struct
 
   type 'a t = Leaf of 'a | Node of 'a t * 'a * 'a t
@@ -49,9 +51,10 @@ module Tree = struct
   end
 
 end
+#+end_src
 
 Answer: 
-
+#+begin_src ocaml
 let bfs t =
   let rec aux results = function
     | [] ->
@@ -64,3 +67,4 @@ let bfs t =
           aux results ls
   in
   aux [] [Loc (t, Top)];;
+#+end_src

@@ -1,3 +1,4 @@
+#+title: Week 5 Session 5: Implementing Mutable Lists
 Using mutable record fields, we can define the type of a list data structure with explicit pointers, as defined by the type 'a xlist given in the prelude.
 
 The empty list is written:
@@ -14,16 +15,17 @@ The list containing the elements 1, then 2 then 3 is written:
                               List (3, { pointer =
                                            Nil }) }) }) }
   
-1. Define head : 'a xlist -> 'a that returns the first element of the list if it exists, or fails with Empty_xlist. 
-This function does not modify the list.
-2. Define tail : 'a xlist -> 'a xlist that returns the list without its first element if it exists, or fails with Empty_xlist. 
-This function does not modify the list.
-3. Define add : 'a -> 'a xlist -> unit that modifies the list in place to add an element at the front.
-4. Define chop : 'a xlist -> unit that modifies the list to remove its front element, or fails with Empty_xlist.
-5. Define append : 'a xlist -> 'a xlist -> unit, a destructive concatenation operation that modifies the last pointer of the first list to point to the beginning of the second list.
-6. Define filter : ('a -> bool) -> 'a xlist -> unit, a destructive filter operation on lists that removes from the list all elements that do not satisfy the boolean predicate passed as parameter.
+ 1. Define head : 'a xlist -> 'a that returns the first element of the list if it exists, or fails with Empty_xlist.
+    This function does not modify the list.
+ 2. Define tail : 'a xlist -> 'a xlist that returns the list without its first element if it exists, or fails with Empty_xlist.
+    This function does not modify the list.
+ 3. Define add : 'a -> 'a xlist -> unit that modifies the list in place to add an element at the front.
+ 4. Define chop : 'a xlist -> unit that modifies the list to remove its front element, or fails with Empty_xlist.
+ 5. Define append : 'a xlist -> 'a xlist -> unit, a destructive concatenation operation that modifies the last pointer of the first list to point to the beginning of the second list.
+ 6. Define filter : ('a -> bool) -> 'a xlist -> unit, a destructive filter operation on lists that removes from the list all elements that do not satisfy the boolean predicate passed as parameter.
 
-THE GIVEN PRELUDE
+The given prelude:
+#+begin_src ocaml
 type 'a xlist =
   { mutable pointer : 'a cell }
 and 'a cell =
@@ -37,34 +39,35 @@ let cons elt rest =
   { pointer = List (elt, rest) } ;;
 
 exception Empty_xlist ;;
+#+end_src
 
 Answer: 
-
-let head l = 
+#+begin_src ocaml
+let head l =
   match l with
-    {pointer = Nil} -> raise Empty_xlist
+  | {pointer = Nil} -> raise Empty_xlist
   | { pointer = List (n, head) } -> n ;;
 
 let tail l =
   match l with
-    {pointer = Nil} -> raise Empty_xlist
+  | {pointer = Nil} -> raise Empty_xlist
   | { pointer = List (n, tail) } -> tail;;
 
 let add a l = l.pointer <- List (a, {pointer = l.pointer});;
 
 let chop l = 
   match l with
-    {pointer = Nil} -> raise Empty_xlist
+  | {pointer = Nil} -> raise Empty_xlist
   | { pointer = List (n, tail) } -> l.pointer <- tail.pointer;;
 
 let rec append l l' =
   match l.pointer with 
-    Nil -> l.pointer <- l'.pointer
+  | Nil -> l.pointer <- l'.pointer
   | List (x, y) -> append y l';;
 
 let rec filter p l =
   match l.pointer with
-    Nil -> ()
+  | Nil -> ()
   | List (x, y) -> 
       if p x 
       then filter p y 
@@ -73,3 +76,4 @@ let rec filter p l =
           l.pointer <- y.pointer; 
           filter p l
         );;
+#+end_src

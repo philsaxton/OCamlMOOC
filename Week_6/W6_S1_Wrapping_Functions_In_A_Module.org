@@ -1,10 +1,13 @@
+#+title: Week 6 Session 1: Wrapping Functions In A Module
 1. Encapsulate the necessary values in a module named Exp so that the definition of example is accepted by the type checker.
 
-THE GIVEN PRELUDE
+The given prelude:
+#+begin_src ocaml
 type e = EInt of int | EMul of e * e | EAdd of e * e
+#+end_src
 
 Answer:
-
+#+begin_src ocaml
 module Exp = struct
   
   let int x = EInt x
@@ -28,4 +31,5 @@ end;;
 
 let example x y z = (* don't change anything to this defintion *)
   Exp.int (Exp.eval (Exp.mul (Exp.int x) (Exp.add (Exp.int y) (Exp.int z)))) 
-  
+#+end_src
+\

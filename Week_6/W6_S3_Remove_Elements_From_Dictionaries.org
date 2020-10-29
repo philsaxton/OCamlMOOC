@@ -1,8 +1,9 @@
+#+title: Week 6 Session 3: Remove Elements From Dictionaries
 The following code is the program explained during the video sequence except that we have modified the interface DictSig a little bit. Now, it is possible to remove a key from a dictionary.
+ 1. Update the code to have it accepted by the type-checker.
 
-1. Update the code to have it accepted by the type-checker.
-
-THE GIVEN PRELUDE
+The given prelude:
+#+begin_src ocaml
 module type DictSig = sig
   type ('key, 'value) t
   val empty : ('key, 'value) t
@@ -11,9 +12,10 @@ module type DictSig = sig
   val lookup : ('key, 'value) t -> 'key -> 'value
   val remove : ('key, 'value) t -> 'key -> ('key, 'value) t
 end ;;
+#+end_src
 
 Answer: 
-
+#+begin_src ocaml
 module Dict : DictSig = struct
   type ('key, 'value) t =
     | Empty
@@ -49,6 +51,7 @@ module Dict : DictSig = struct
         else Node (l, k', v', remove r k )
   and join l r = 
     match l with 
-      Empty -> r
+    | Empty -> r
     | Node (ll, lk', lv', lr) -> Node (ll, lk', lv', join lr r) 
 end ;; 
+#+end_src
