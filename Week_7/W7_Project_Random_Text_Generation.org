@@ -293,8 +293,7 @@ let walk_ltable table =
 
 (* -- Part B -------------------------------------------------------------- *)
 
-(* insert -> distribution -> string -> distribuiton:
- iserts a word into the distribution *)
+(* insert -> distribution -> string -> distribuiton: iserts a word into the distribution *)
 let insrt distro x = 
   match distro with 
     {total = t; amounts = a} -> if List.mem_assoc x a  
