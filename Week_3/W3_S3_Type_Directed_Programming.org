@@ -7,7 +7,7 @@ We give you the example program of the lecture in which two type definitions hav
  3. Update describe_state so that the description of the Tired state is "tired".
  4. Update tell_action so that tell_action Sleep is "took a nap".
 
-The Given Prelude:
+The given prelude:
 #+begin_src ocaml
 type story = {
   context         : context;
@@ -105,8 +105,7 @@ let rec is_one_of state states =
 ;;
 
 let rec all_characters_are states = function
-  | [] ->
-      true
+  | [] -> true
   | character :: cs ->
       is_one_of character.state states && all_characters_are states cs
 ;;

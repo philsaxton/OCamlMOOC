@@ -9,7 +9,7 @@ We will only use imperative features to display them.
     In each line, the first character printed must be for x = 0, the last one for x = width. When the function result is true, a sharp ('#') must be displayed, and a space otherwise.
     To try your function, the prelude defines sample images and image builders.
     For instance, the image disk 5 5 5 would be displayed as the following ASCII art, when rendered between coordinates 0 <= x <= 10 and 0 <= y <= 10.
-     #+begin_src ocaml
+     #+begin_src org
      #
   #######
  #########
@@ -30,7 +30,7 @@ We will only use imperative features to display them.
     Write a recursive render : blend -> int -> int -> bool function, that tells, for a given x and y the boolean color of the point, considering the given blended image.
  3. Define a function display_blend: int -> int -> blend -> unit that takes a width, another one height, a blended image, and displays it by combining the two previous functions.
     As an example, the blend display_blend 10 10 (Rem (Image all_black, Image (disk 5 5 5))) would be displayed as the following ASCII art.
-    #+begin_src ocaml
+    #+begin_src org
 ##### #####
 ##       ##
 #         #

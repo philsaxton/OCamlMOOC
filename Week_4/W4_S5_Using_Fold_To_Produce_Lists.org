@@ -5,9 +5,9 @@ The idea of this exercise is to write functions that iterate on lists, using the
  3. One way of sorting a list is as follows:
     - The empty list is already sorted.
     - If the list l has a head h and a rest r, then a sorted version of l can be obtained in three parts:
-      1. first a sorted version of all elements of r that are smaller or equal to h,
-      2. then h,
-      3. then a sorted version of all elements of r that are greater than h.
+      a. first a sorted version of all elements of r that are smaller or equal to h,
+      b. then h,
+      c. then a sorted version of all elements of r that are greater than h.
 
     Write a function sort:'a list-> 'a list that implements this algorithm, using the function partition of the previous question. This sorting algorithm is also known as Quicksort where the pivot is always the first element of the list.
 
@@ -25,7 +25,7 @@ let partition p l =
     ([], []);;
 
 let rec sort = function 
-    [] -> []
+  | [] -> []
   | h :: r -> 
       let (smaller, greater) = 
         partition (fun x -> x <= h) r in 

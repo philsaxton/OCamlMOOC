@@ -9,7 +9,7 @@ The preludes gives a type 'a clist, which is either a single element of type 'a,
 4. Write a function hd : 'a clist -> 'a option that returns Some x where x is the first element of the input 'a clist, if it is not empty, and returns None otherwise.
 5. Write a function tl : 'a clist -> 'a clist option that returns Some l where l is the input sequence without its first element, if this input sequence is not empty, or returns None otherwise.
 
-The Given Prelude:
+The given prelude:
 #+begin_src ocaml
 type 'a clist =
   | CSingle of 'a
@@ -22,7 +22,7 @@ let example =
         CApp (CSingle 3,
               CApp (CSingle 4, CEmpty)));;
 #+end_src
-              
+
 Answer:
 #+begin_src ocaml
 let to_list l =

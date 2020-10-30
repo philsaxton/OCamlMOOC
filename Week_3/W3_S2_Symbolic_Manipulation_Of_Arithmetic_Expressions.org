@@ -47,7 +47,7 @@ let rec eval e =
 
 let factorize e = 
   match e with 
-    EAdd (EMul (a, b), EMul (c, d)) ->
+  | EAdd (EMul (a, b), EMul (c, d)) ->
       if a = c 
       then EMul (a, EAdd (b, d))
       else if a = d
@@ -61,27 +61,17 @@ let factorize e =
 
 let expand e =
   match e with 
-    EMul (a, EAdd (b, c)) -> EAdd (EMul (a, b), EMul (a, c))
+  | EMul (a, EAdd (b, c)) -> EAdd (EMul (a, b), EMul (a, c))
   | EMul (EAdd (b, c), a) -> EAdd (EMul (a, b), EMul (a, c))
   | e -> e;;
 
 let simplify e =
   match e with 
-    EMul (e, EInt 0) -> EInt 0
+  | EMul (e, EInt 0) -> EInt 0
   | EMul (EInt 0, e) -> EInt 0
   | EMul (e, EInt 1) -> e
   | EMul (EInt 1, e) -> e
   | EAdd (e, EInt 0) -> e
   | EAdd (EInt 0, e) -> e
   | e -> e;;
-#+end_src
-
-Test:
-#+begin_src ocaml
-let test =
-  (EAdd (EInt 0,
-         EMul (EMul (EInt 9, EInt 8),
-               EMul (EMul (EInt 9, EInt 0),
-                     EMul (EAdd (EInt (-2), EInt (-4)), EMul (EInt 1, EInt (-2)))))));;
-
 #+end_src

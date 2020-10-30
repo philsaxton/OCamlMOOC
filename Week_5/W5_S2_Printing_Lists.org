@@ -7,19 +7,19 @@ Answer:
 #+begin_src ocaml
 let rec print_int_list l =
   match l with 
-    [] -> ()
+  | [] -> ()
   | h :: r -> print_newline(print_int h); print_int_list r;;
 
 let print_every_other k l = 
   let rec aux count list = 
     match list with 
-      [] -> ()
+    | [] -> ()
     | h :: r -> if count mod k = 0 
         then print_newline(print_int h); aux (count + 1) r
   in aux 0 l;;
 
 let rec print_list print l =
   match l with 
-    []-> ()
+  | []-> ()
   | h :: r -> print_newline(print h); print_list print r;;
 #+end_src

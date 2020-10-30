@@ -28,8 +28,4 @@ module Exp = struct
     | EAdd (l, r) -> eval l + eval r
     | EMul (l, r) -> eval l * eval r
 end;;
-
-let example x y z = (* don't change anything to this defintion *)
-  Exp.int (Exp.eval (Exp.mul (Exp.int x) (Exp.add (Exp.int y) (Exp.int z)))) 
 #+end_src
-\

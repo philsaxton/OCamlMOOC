@@ -3,7 +3,7 @@ A binary tree t, of the 'a bt type given in the prelude, is either an empty tree
  1. Write a function height : 'a bt -> int that computes the height of a tree.
  2. A tree is balanced if, for all internal node n, its two subtrees have the same height. Write a function balanced : 'a bt -> bool that tells if a tree is balanced.
 
-The Given Prelude:
+The given prelude:
 #+begin_src ocaml
 type 'a bt =
   | Empty
@@ -14,12 +14,12 @@ Answer:
 #+begin_src ocaml
 let rec height t =
   match t with 
-    Empty -> 0
+  | Empty -> 0
   | Node (l, x, r) -> 1 + max (height l) (height r);;
 
 let rec balanced t  = 
   match t with 
-    Empty -> true
+  | Empty -> true
   | Node (l, x, r) -> 
       height l = height r 
       && balanced l

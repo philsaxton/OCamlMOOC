@@ -35,8 +35,7 @@ module Dict : DictSig = struct
 
   let rec lookup d k =
     match d with
-    | Empty ->
-        raise NotFound
+    | Empty -> raise NotFound
     | Node (l, k', v', r) ->
         if k = k' then v'
         else if k < k' then lookup l k
@@ -44,8 +43,8 @@ module Dict : DictSig = struct
 
   let rec remove d k = 
     match d with 
-      Empty -> d  
-    |Node (l, k', v', r) ->
+    | Empty -> d
+    | Node (l, k', v', r) ->
         if k = k' then join l r
         else if k < k' then Node (remove l k , k', v', r)
         else Node (l, k', v', remove r k )

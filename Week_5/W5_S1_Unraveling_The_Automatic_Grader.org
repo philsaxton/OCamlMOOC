@@ -36,7 +36,7 @@ let exec f x =
   
 let compare user reference to_string =
   match user, reference with
-    (Ok a, Ok b) -> 
+  | (Ok a, Ok b) ->
       if a = b 
       then ("got correct value " ^ to_string a, Successful)
       else ("got unexpected value " ^ to_string a, Failed)
@@ -50,7 +50,7 @@ let compare user reference to_string =
 
 let test user reference sample to_string = 
   let rec aux = function 
-      0 -> []
+    | 0 -> []
     | i -> let sample = sample () in 
         (compare (exec user sample) (exec reference sample) to_string) :: aux (i - 1)
   in aux 10;; 

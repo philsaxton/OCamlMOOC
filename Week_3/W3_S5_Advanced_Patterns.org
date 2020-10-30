@@ -4,7 +4,7 @@ Let's rewrite some pattern matching with advanced constructs.
  2. The only_small_lists function takes a list as input and returns this list only if it contains two or less elements, otherwise the empty list is returned. Rewrite this function using or-patterns and an as-pattern. It should boil down to two cases.
  3. Turn the third case of no_consecutive_repetition into two distinct cases, dropping the if construct in favor of a when clause.
 
-The Given Prelude:
+The given prelude:
 #+begin_src ocaml
 type e = EInt of int | EMul of e * e | EAdd of e * e
 #+end_src

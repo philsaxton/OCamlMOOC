@@ -47,7 +47,7 @@ Answer:
 (*finds 'char' c in char_to_children m and returns the trie folling c or None*)
 let children_from_char m c = 
   let rec aux = function
-      [] -> None
+    | [] -> None
     | (m, t) :: tl -> 
         if m = c 
         then Some t 
@@ -58,7 +58,7 @@ let children_from_char m c =
 let update_children (m : char_to_children) c t = 
   let rec aux m =
     match m with
-      [] -> [c, t]
+    | [] -> [c, t]
     | (m, x) :: tl -> 
         if m = c 
         then (c, t) :: tl 
@@ -73,7 +73,7 @@ let lookup trie w =
     then x 
     else 
       match children_from_char y w.[idx] with 
-        None -> None
+      | None -> None
       | Some i -> aux (idx + 1) i
   in aux 0 trie;; 
 
@@ -83,7 +83,7 @@ let insert trie w v =
     then Trie (Some v, children)
     else 
       match children_from_char children w.[idx] with 
-        None -> Trie (i, update_children children w.[idx] (aux (idx + 1) empty))
+      | None -> Trie (i, update_children children w.[idx] (aux (idx + 1) empty))
       | Some x -> Trie (i, update_children children w.[idx] (aux (idx + 1) x))
   in aux 0 trie;; 
 #+end_src

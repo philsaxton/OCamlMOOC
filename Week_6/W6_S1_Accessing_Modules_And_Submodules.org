@@ -57,8 +57,7 @@ Answer:
 #+begin_src ocaml
 let bfs t =
   let rec aux results = function
-    | [] ->
-        List.rev results
+    | [] -> List.rev results
     | l :: ls ->
         let results = (Tree.Iterator.focus l) :: results in
         try
