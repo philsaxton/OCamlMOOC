@@ -7,14 +7,14 @@ This method is known under the term of Markov chain. From the input text, we com
 
 For instance, if we examine ”I am a man and my dog is a good dog and a good dog makes a good man”, delimiting it with ”START” and ”STOP” to identify the beginning and end of the sentence, we end up with the transition table on bellow.
 #+begin_src org
-*word*	→	*next*	*freq*
+word	→	next	freq
 "START" →	"I"	100%
 "I"	→	"am"	100%
 "am"	→	"a"	100%
 "a"	→	"man"	25%
         |	"good"	75%
 "man"	→	"and"	50%
-	    |   "STOP"	50%
+        |	"STOP"	50%
 "and"	→	"my"	50%
         |	"a"	50%
 "my"	→	"dog"	100%
@@ -149,8 +149,9 @@ So let's say we want to identify sequences of N words in the text. The prefix_le
 The table bellow gives the lookup table for the example given at the beginning of the project: ”I am a man and my dog is a good dog and a good dog makes a good man”, and a size of 2. You can see that the branching points are fewer and make a bit more sense.
 As you can see, we will use "STOP" as an end marker as before. But instead of a single "START" we will use as a start marker a prefix of the same size as the others, filled with "START".
 #+begin_src org
-*prefix*	    →	    *next*	*freq*
+prefix	    →	    next	freq
 ["START"; "START"]→     "I"	100%
+["START"; "START"]	→	    "I"	100%
 ["START"; "I"]	→	    "am"	100%
 ["I"; "am"]	→	    "a"	100%
 ["am"; "a"]	→	    "man"	100%
@@ -189,7 +190,7 @@ generated texts.
 let sauce_ptable =
    merge_ptables
      (List.map
-        (fun s -> build_ptable s 2)
+        (fun s -> builD_ptable s 2)
         (sentences some_cookbook_sauce_chapter)) ;;
 display_quote (walk_ptable sauce_ptable) ;;
 #+end_src
