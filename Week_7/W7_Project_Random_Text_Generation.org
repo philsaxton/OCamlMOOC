@@ -6,25 +6,25 @@ For this, given a text corpus as input, we will first compute the frequency of a
 This method is known under the term of Markov chain. From the input text, we compute a transition table that associates to each word the list of words that may appear after it, with their relative frequencies.
 
 For instance, if we examine ”I am a man and my dog is a good dog and a good dog makes a good man”, delimiting it with ”START” and ”STOP” to identify the beginning and end of the sentence, we end up with the transition table on bellow.
-#+begin_src org
-word	→	next	freq
-"START" →	"I"	100%
-"I"	→	"am"	100%
-"am"	→	"a"	100%
-"a"	→	"man"	25%
-        |	"good"	75%
-"man"	→	"and"	50%
-        |	"STOP"	50%
-"and"	→	"my"	50%
-        |	"a"	50%
-"my"	→	"dog"	100%
-"dog"	→	"is"	33%
-        |	"and"	33%
-        |	"makes" 34%
-"good"	→	"dog"	66%
-        |	"man"	34%
-"is"	→	"a"	100%
-"makes" →	"a"	100%
+#+begin_src
+word    →    next    freq
+"START" →    "I"     100%
+"I"     →    "am"    100%
+"am"    →    "a"     100%
+"a"     →    "man"    25%
+        |    "good"   75%
+"man"   →    "and"    50%
+        |    "STOP"   50%
+"and"   →    "my"     50%
+        |    "a"      50%
+"my"    →    "dog"   100%
+"dog"   →    "is"     33%
+        |    "and"    33%
+        |    "makes"  34%
+"good"  →    "dog"    66%
+        |    "man"    34%
+"is"    →    "a"     100%
+"makes" →    "a"     100%
 #+end_src
 This table can then be used to generate new text that ressembles the input in the following way: starting from the "START" word, choose one of the words that may appear after it, with the probability found in the table, add it to the output, then iterate the process until the "STOP" word is found. Below are some example sentences produced using this table.
 #+begin_src org
@@ -148,28 +148,27 @@ So let's say we want to identify sequences of N words in the text. The prefix_le
 
 The table bellow gives the lookup table for the example given at the beginning of the project: ”I am a man and my dog is a good dog and a good dog makes a good man”, and a size of 2. You can see that the branching points are fewer and make a bit more sense.
 As you can see, we will use "STOP" as an end marker as before. But instead of a single "START" we will use as a start marker a prefix of the same size as the others, filled with "START".
-#+begin_src org
-prefix	    →	    next	freq
-["START"; "START"]→     "I"	100%
-["START"; "START"]	→	    "I"	100%
-["START"; "I"]	→	    "am"	100%
-["I"; "am"]	→	    "a"	100%
-["am"; "a"]	→	    "man"	100%
-["man"; "and"]	→	    "my"	100%
-["is"; "a"]	→	    "good"	100%
-["and"; "my"]	→	    "dog"	100%
-["my"; "dog"]	→	    "is"	100%
-["makes"; "a"]	→	    "good"	100%
-["a"; "good"]	→	    "man"	33%
-                |       "dog"   66%
-["dog"; "is"]	→	    "a"	100%
-["and"; "a"]	→	    "good"	100%
-["good"; "dog"] →       "makes" 50%
-                |       "and"	50%
-["dog"; "and"]	→	    "a"	100%
-["a"; "man"]	→	    "and"	100%
-["good"; "man"] →       "STOP"	100%
-["dog"; "makes"] →	    "a"	100%
+#+begin_src
+prefix             →    next     freq
+["START"; "START"] →    "I"      100%
+["START"; "I"]     →    "am"     100%
+["I"; "am"]        →    "a"      100%
+["am"; "a"]        →    "man"    100%
+["man"; "and"]     →    "my"     100%
+["is"; "a"]        →    "good"   100%
+["and"; "my"]      →    "dog"    100%
+["my"; "dog"]      →    "is"     100%
+["makes"; "a"]     →    "good"   100%
+["a"; "good"]      →    "man"     33%
+                   |    "dog"     66%
+["dog"; "is"]      →    "a"      100%
+["and"; "a"]       →    "good"   100%
+["good"; "dog"]    →    "makes"   50%
+                   |    "and"     50%
+["dog"; "and"]     →    "a"      100%
+["a"; "man"]       →    "and"    100%
+["good"; "man"]    →    "STOP"   100%
+["dog"; "makes"]   →    "a"      100%
 #+end_src
 - First, define start: int -> string list that makes the start prefix for a given size (start 0 = [], start 1 = [ "START" ], start 2 = [ "START" ; "START" ], etc.).
 - Define shift: string list -> string -> string list. It removes the front element of the list and puts the new element at the end. (shift [ "A" ; "B" ; "C" ] "D" = [ "B" ; "C" ; "D" ], shift [ "B" ; "C" ; "D" ] "E" = [ "C" ; "D" ; "E" ], etc.).

@@ -1,4 +1,4 @@
-#+title: Wweek 2 Session 1: Enigma
+#+title: Week 2 Session 1: Enigma
 Let us solve the following puzzle: 
 If you multiply my grand-son age by four, you know how old I am. Now, if you exchange the two digits of our ages then you have to multiply by three my age to get the age of my grand-son!
  1. Write a function exchange of type int -> int that takes an integer x between 10 and 99 and returns an integer which is x whose digits have been exchanged. For instance, exchange 73 = 37.
