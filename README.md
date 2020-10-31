@@ -1,4 +1,4 @@
-## Introduction Functional to Functional Programming with OCaml MOOC
+## Introduction to Functional Programming with OCaml MOOC
 This repository contains my work on the Functional programming MOOC completed in the fall of 2018.
 
 #### The coarse:
